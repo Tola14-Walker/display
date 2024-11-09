@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date and Real-Time Clock</title>
+<link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+  <div class="clock-container">
+    <div class="date" id="currentDate"></div>
+    <div class="time" id="currentTime"></div>
+  </div>
+
+<script>
+// Set a specific date
+const specificDate = "09 November 2024";
+
+function updateTime() {
+  const date = new Date();
+
+  // Get the current time
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+
+  // Display the specific date and current time
+  document.getElementById('currentDate').innerText = specificDate;
+  document.getElementById('currentTime').innerText = `${hours}:${minutes}:${seconds}`;
+}
+
+// Update the time every second
+setInterval(updateTime, 1000);
+
+// Initial call
+updateTime();
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+/* General Body Styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0; /* Light gray background */
+    font-family: Arial, sans-serif; /* Set font style */
+    margin: 0; /* Remove default margin */
+  }
+  
+  /* Container for the clock */
+  .clock-container {
+    text-align: center;
+    padding: 20px;
+    background: #fff; /* White background for the clock box */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow around the box */
+    border-radius: 8px; /* Rounded corners */
+    width: 250px; /* Set a fixed width for the container */
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+  
+  /* Date Styling */
+  .date {
+    font-size: 24px; /* Font size for the date */
+    margin-bottom: 10px; /* Space between date and time */
+    color: #333; /* Dark text for date */
+  }
+  
+  /* Time Styling */
+  .time {
+    font-size: 32px; /* Font size for the time */
+    font-weight: bold; /* Bold font for the time */
+    color: #2d2d2d; /* Slightly darker color for time */
+  }
+  

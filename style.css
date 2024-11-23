@@ -1,36 +1,218 @@
-/* General Body Styling */
+/* Import the custom Khmer font */
+@font-face {
+    font-family: 'MyKhmerFont';
+    src: url('fonts/Khmer OS MuolLight Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Global Styles */
 body {
+    font-family: 'MyKhmerFont', sans-serif;
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark text color */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full height */
+    width: 100vw; /* Full width */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+}
+
+/* Header Styles */
+header {
+    display: flex; /* Use Flexbox for alignment */
+    justify-content: space-between; /* Push logos to the edges */
+    align-items: center; /* Center-align vertically */
+    padding: 20px; /* Add some spacing */
+    background-color: #fff; /* White background for the header */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+header img.logo {
+    width: 60px; /* Smaller fixed width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the logo fits within its container */
+    margin: 0; /* Remove any extra margins */
+    padding: 0; /* Remove padding */
+}
+
+header h1 {
+    font-size: 1em;
+    color: #000000; /* Green text color */
+    margin: 0;
+    flex-grow: 1; /* Allow title to take extra space */
+    text-align: center; /* Center-align the text */
+    text-shadow: 5px 5px 5px rgba(128, 128, 128, 0.3); /* Add shadow effect */
+}
+
+/* Main Content Styles */
+main {
+    flex-grow: 1; /* Allow the main content to fill remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    padding: 20px;
+    text-align: center;
+}
+
+main p {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Floating Animations */
+.floating-text {
+    font-size: 1em;
+    color: #4caf50;
+    display: inline-block;
+    animation: floatRight 10s linear infinite;
+}
+
+.floating-up-text {
+    font-size: 2em;
+    color: #000;
+    display: inline-block;
+    animation: floatUp 3s ease-in-out infinite;
+}
+
+main h2 {
+    margin-top: 20px;
+    color: #4caf50;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Animations */
+@keyframes floatRight {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    header img.logo {
+        width: 50px; /* Even smaller logos on small screens */
+    }
+
+    header h1 {
+        font-size: 0.5em;
+    }
+
+    main p {
+        font-size: 1em;
+    }
+}
+
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0; /* Light gray background */
-    font-family: Arial, sans-serif; /* Set font style */
-    margin: 0; /* Remove default margin */
-  }
-  
-  /* Container for the clock */
-  .clock-container {
+    background-color: black; /* Black background behind video */
+}
+
+.modal-content video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Time Display Styles */
+.time-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff; /* White text */
+    font-family: 'Arial', sans-serif;
     text-align: center;
-    padding: 20px;
-    background: #fff; /* White background for the clock box */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow around the box */
-    border-radius: 8px; /* Rounded corners */
-    width: 250px; /* Set a fixed width for the container */
-    box-sizing: border-box; /* Include padding in width calculation */
-  }
-  
-  /* Date Styling */
-  .date {
-    font-size: 24px; /* Font size for the date */
-    margin-bottom: 10px; /* Space between date and time */
-    color: #333; /* Dark text for date */
-  }
-  
-  /* Time Styling */
-  .time {
-    font-size: 32px; /* Font size for the time */
-    font-weight: bold; /* Bold font for the time */
-    color: #2d2d2d; /* Slightly darker color for time */
-  }
-  
+}
+
+.date-text {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.time-text {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}

@@ -132,3 +132,44 @@ updateTime();
 
 </body>
 </html>
+
+
+//////////////
+// Fetch and update the data every 5 seconds
+setInterval(fetchAndDisplayCSV, 5000); // Fetch every 5000 ms (5 seconds)
+
+
+
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSV Data Display</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="icons/logo-001.png" alt="Logo 1" class="logo">
+            <div class="header-text">
+                <h1 class="floating-text">សួស្តី! សូមស្វាគមន៍</h1>
+                <p>ឯកសារមានព័ត៌មានដែលត្រូវបានបង្ហាញពី CSV</p>
+            </div>
+            <img src="icons/logo-001.png" alt="Logo 2" class="logo">
+        </header>
+        <main>
+            <p class="floating-up-text">នេះគឺជាអក្សរភាសាខ្មែរនៅក្នុងគេហទំព័រនេះ។</p>
+            <div id="csv-data">
+                <!-- Data from the CSV file will be displayed here -->
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+
+
+function convertToKhmerNumerals(number) {
+    const khmerNumerals = ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'];
+    return number.split('').map(digit => khmerNumerals[parseInt(digit)]).join('');
+}

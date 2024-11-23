@@ -1,39 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="km">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Date and Real-Time Clock</title>
-<link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
+<title>CSV Data Display</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="clock-container">
-    <div class="date" id="currentDate"></div>
-    <div class="time" id="currentTime"></div>
-  </div>
+    <div class="container">
+        <header>
+            <img src="icons/logo-001.png" alt="Logo 1" class="logo" id="logo1">
+            <div class="header-text">
+                <h1> ព្រះរាជាណាចក្រកម្ពុជា​
+                <p> ជាតិ​ សាសនា​ ព្រះមហាក្សត្រ​ </p>
+            </div>
+            <img src="icons/logo-001.png" alt="Logo 2" class="logo" id="logo2">
+        </header>
+        <main>
+            <p class="floating-up-text">នេះគឺជាអក្សរភាសាខ្មែរនៅក្នុងគេហទំព័រនេះ។</p>
+            <table id="csv-table">
+                <!-- Table will be populated dynamically -->
+            </table>
+        </main>
+    </div>
 
-<script>
-// Set a specific date
-const specificDate = "09 November 2024";
+    <div class="clock-container">
+        <div class="date-text" id="currentDate"></div>
+        <div class="time-text" id="currentTime"></div>
+    </div>
 
-function updateTime() {
-  const date = new Date();
+    <!-- Modal for Video Advertisement -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close-button">&times;</span>
+            <video id="advertising-video" controls autoplay>
+                <source src="ads/video002.MP4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
 
-  // Get the current time
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  const seconds = String(date.getSeconds()).padStart(2, '0');
+    <script>
+        // Fetch and display data from a CSV file
+        fetch('data.csv') // Replace 'data.csv' with your CSV file path
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load CSV file');
+                }
+                return response.text();
+            })
+            .then(csvText => {
+                const rows = csvText.split('\n'); // Split rows
+                const table = document.getElementById('csv-table');
+                rows.forEach((row, rowIndex) => {
+                    const columns = row.split(','); // Split columns
+                    const tableRow = document.createElement('tr');
+                    columns.forEach((col) => {
+                        const cell = document.createElement(rowIndex === 0 ? 'th' : 'td'); // Use <th> for header row
+                        cell.textContent = col;
+                        tableRow.appendChild(cell);
+                    });
+                    table.appendChild(tableRow);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
 
-  // Display the specific date and current time
-  document.getElementById('currentDate').innerText = specificDate;
-  document.getElementById('currentTime').innerText = `${hours}:${minutes}:${seconds}`;
-}
+    <script>
+        // Function to show the video modal
+        function showVideoModal() {
+            const modal = document.getElementById('video-modal');
+            modal.style.display = 'block';
 
-// Update the time every second
-setInterval(updateTime, 1000);
+            const video = document.getElementById('advertising-video');
+            video.play();
 
-// Initial call
-updateTime();
-</script>
+            // Automatically close modal when video ends
+            video.onended = () => {
+                modal.style.display = 'none';
+            };
+        }
+
+        // Close modal when the close button is clicked
+        document.getElementById('close-modal').onclick = () => {
+            const modal = document.getElementById('video-modal');
+            modal.style.display = 'none';
+
+            const video = document.getElementById('advertising-video');
+            video.pause();
+            video.currentTime = 0; // Reset video to start
+        };
+
+        // Display the video modal every 1 = 1ms
+        setInterval(showVideoModal, 30000); // 
+    </script>
+
+    <script>
+        function convertToKhmerNumerals(number) {
+            const khmerNumerals = ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'];
+            return number.split('').map(digit => khmerNumerals[parseInt(digit)]).join('');
+        }
+        
+        function updateTime() {
+            const date = new Date();
+            // Format the current date
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = date.toLocaleDateString('km-KH', options); // Format for Khmer locale
+            // Get the current time
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            // Display the specific date and current time
+            document.getElementById('currentDate').innerText = formattedDate;
+            document.getElementById('currentTime').innerText = `${hours}:${minutes}:${seconds}`;
+        }
+            
+        // Update the time every second
+        setInterval(updateTime, 1000);
+            
+        // Initial call
+        updateTime();
+    </script>
+
+
 </body>
-</html>
+</html>c
